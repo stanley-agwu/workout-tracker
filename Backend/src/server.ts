@@ -1,19 +1,19 @@
-import express from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 
 
-const app  = express();
+const app: Application  = express();
 dotenv.config({ path: './config/config.env' });
 
 
 // middleware
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(req.path, req.method);
   next();
 })
 
 // route
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.json({ msg: 'Welcome to the App'})
 })
 
