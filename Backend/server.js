@@ -1,7 +1,22 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+
 
 const app  = express();
+dotenv.config({ path: './config/config.env' });
 
-const port = 4000;
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+// middleware
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+})
+
+// route
+app.get('/', (req, res) => {
+  res.json({ msg: 'Welcome to the App'})
+})
+
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
