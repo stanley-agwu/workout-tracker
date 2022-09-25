@@ -1,13 +1,9 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
 import connectDB from './db/db';
 
 import WorkoutRoutes from './routes/workouts';
 
-
 const app: Application  = express();
-dotenv.config({ path: './config/config.env' });
-
 
 // middleware
 app.use(express.json())
