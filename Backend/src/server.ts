@@ -1,5 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
+import connectDB from './db/db';
+
 import WorkoutRoutes from './routes/workouts';
 
 
@@ -18,6 +20,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // route
 app.use('/api/workouts', WorkoutRoutes);
 
-const PORT = process.env.PORT;
+// connect to database
+connectDB();
 
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
