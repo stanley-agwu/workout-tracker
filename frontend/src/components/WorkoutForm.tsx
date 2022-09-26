@@ -40,18 +40,19 @@ const WorkoutForm: FC = () => {
     <Form 
       onSubmit={handleSubmit} 
       className="p-4 border border-1border-light rounded"
-      style={{ minWidth: '22rem', boxShadow: '2px 2px 5px rgba(0,0,0,0.25)' }}>
+      style={{ minWidth: '22rem', boxShadow: '2px 2px 5px rgba(0,0,0,0.25)' }}
+    >
       <Form.Group className="mb-3 d-flex flex-column align-items-start" controlId="formBasicName">
-        <Form.Label className="text-left">Name of workout</Form.Label>
+        <Form.Label className="text-left">Name of workout:</Form.Label>
         <Form.Control type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter name of workout" />
       </Form.Group>
 
       <Form.Group className="mb-3 d-flex flex-column align-items-start" controlId="formBasicRepetitions">
-        <Form.Label>Repetitions of workout</Form.Label>
+        <Form.Label>Repetitions of workout:</Form.Label>
         <Form.Control type="text" value={repetitions} onChange={(e) => setRepetitions(e.target.value)} placeholder="Enter workout count" />
       </Form.Group>
       <Form.Group className="mb-3 d-flex flex-column align-items-start" controlId="formBasicLoad">
-        <Form.Label>Workout load</Form.Label>
+        <Form.Label>Workout load (in Kg):</Form.Label>
         <Form.Control type="text" value={load} onChange={(e) => setLoad(e.target.value)} placeholder="Enter workout load" />
       </Form.Group>
       <Button variant="success" type="submit" style={{ width: "100%" }}>

@@ -9,3 +9,19 @@
   word-break: break-word;
   padding: 10px 0 20px;
 }
+
+.title {
+  display: flex;
+  font-weight: 700;
+  color: #198754;
+  font-size: 24px;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 8px;
+}
