@@ -1,10 +1,10 @@
 export type Workout = {
-  title: String,
-  repetitions: Number,
-  load: Number,
-  _id: String,
-  createdAt: String,
-  updatedAt: String,
+  title: string,
+  repetitions: number,
+  load: number,
+  _id: string,
+  createdAt: string,
+  updatedAt: string,
 }
 
 export interface IProps {
