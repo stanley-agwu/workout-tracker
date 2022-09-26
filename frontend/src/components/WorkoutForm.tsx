@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 
 import './styles.css';
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 
 const WorkoutForm: FC = () => {
   const [title, setTitle] = useState<string>();
@@ -11,6 +12,8 @@ const WorkoutForm: FC = () => {
   const [load, setLoad] = useState<string>();
   const [error, setError] = useState<any|null>(null);
   const [showError, setShowError] = useState<boolean>(true);
+
+  const { dispatch } = useWorkoutsContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ const WorkoutForm: FC = () => {
       setTitle('');
       setRepetitions('');
       setLoad('');
+      dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });
     }
   }
 

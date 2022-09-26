@@ -1,11 +1,11 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect} from 'react'
 import { Container, Stack } from 'react-bootstrap';
-import { Workout } from '../types';
 import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from '../components/WorkoutForm';
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 
 const Home: FC = () => {
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const {state: { workouts }, dispatch} = useWorkoutsContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -13,11 +13,11 @@ const Home: FC = () => {
       const results = await response.json();
 
       if (response.status === 200) {
-        setWorkouts(results.workouts);
+        dispatch({ type: 'SET_WORKOUTS', payload: results.workouts });
       }
     }
     fetchWorkouts();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container className="my-4">
