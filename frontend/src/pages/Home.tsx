@@ -23,7 +23,7 @@ const Home: FC = () => {
     <Container className="my-4">
       <Stack gap={4} direction="horizontal">
         <Stack gap={3} className="col-md-5">
-          {workouts.length > 0 && workouts.map((workout) => (
+          {workouts.length && workouts.map((workout) => (
             <WorkoutDetails key={workout._id} workout={workout} />
           ))}
         </Stack>
@@ -31,9 +31,8 @@ const Home: FC = () => {
           <WorkoutForm />
         </Stack>
       </Stack>
-
     </Container>
   )
 }
 
-export default Home
+export default Home;
