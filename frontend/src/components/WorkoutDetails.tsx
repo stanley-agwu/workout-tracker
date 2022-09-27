@@ -4,12 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ReactComponent as DeleteIcon } from '../assets/delete.svg';
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { ENDPOINTS } from '../constants';
 
 const WorkoutDetails: React.FC<IProps> = ({ workout }) => {
    const { dispatch } = useWorkoutsContext();
 
   const handleDelete = async () => {
-    const response = await fetch(`/api/workouts/${workout._id}`, {
+    const response = await fetch(`${ENDPOINTS.BASE_URL}/${workout._id}`, {
       method: 'DELETE',
     });
     const results = await response.json();

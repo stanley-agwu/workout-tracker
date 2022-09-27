@@ -5,13 +5,14 @@ import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from '../components/WorkoutForm';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import './styles.css';
+import { ENDPOINTS } from '../constants';
 
 const Home: FC = () => {
   const {state: { workouts }, dispatch} = useWorkoutsContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/workouts');
+      const response = await fetch(ENDPOINTS.BASE_URL);
       const results = await response.json();
 
       if (response.status === 200) {

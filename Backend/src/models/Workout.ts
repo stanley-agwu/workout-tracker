@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const workoutSchema = new mongoose.Schema({
   title: {
-    type: 'string',
+    type: String,
     required: true,
   },
   repetitions: {

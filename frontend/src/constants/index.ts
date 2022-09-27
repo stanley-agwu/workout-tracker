@@ -3,3 +3,7 @@ export const ACTIONS = {
   CREATE_WORKOUT: 'CREATE_WORKOUT',
   DELETE_WORKOUT: 'DELETE_WORKOUT',
 }
+
+export const ENDPOINTS = {
+  BASE_URL: '/api/workouts',
+}
