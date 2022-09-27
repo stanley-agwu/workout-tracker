@@ -8,7 +8,7 @@ const Workout_1 = __importDefault(require("../models/Workout"));
 const mongoose_1 = __importDefault(require("mongoose"));
 // get all workouts
 const getAllWorkouts = async (req, res) => {
-    const workouts = await Workout_1.default.find({}).sort({ createdAt: 'asc' });
+    const workouts = await Workout_1.default.find({}).sort({ updatedAt: 'desc' });
     res.status(200).json({ workouts });
 };
 exports.getAllWorkouts = getAllWorkouts;
@@ -27,6 +27,16 @@ const getWorkout = async (req, res) => {
 exports.getWorkout = getWorkout;
 // create new workout
 const createWorkout = async (req, res) => {
+    const { title, repetitions, load } = req.body;
+    const fields = [];
+    if (!title)
+        fields.push('title');
+    if (!repetitions)
+        fields.push('repetitions');
+    if (!load)
+        fields.push('load');
+    if (fields.length)
+        return res.status(400).json({ error: 'Please fill in all fields', fields });
     try {
         const workout = await Workout_1.default.create(req.body);
         res.status(200).json({ workout });
@@ -58,7 +68,7 @@ const updateWorkout = async (req, res) => {
     if (!mongoose_1.default.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Invalid id, no such workout' });
     }
-    const workout = await Workout_1.default.findByIdAndUpdate(id, { ...req.body });
+    const workout = await Workout_1.default.findByIdAndUpdate(id, { ...req.body }, { new: true });
     if (!workout) {
         return res.status(404).json({ error: 'workout not found' });
     }
