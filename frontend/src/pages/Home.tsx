@@ -1,8 +1,10 @@
 import React, { FC, useEffect} from 'react'
 import { Container, Stack } from 'react-bootstrap';
+
 import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from '../components/WorkoutForm';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import './styles.css';
 
 const Home: FC = () => {
   const {state: { workouts }, dispatch} = useWorkoutsContext();
@@ -20,10 +22,10 @@ const Home: FC = () => {
   }, [dispatch]);
 
   return (
-    <Container className="my-4">
-      <Stack gap={4} direction="horizontal">
+    <Container>
+      <Stack gap={4} direction="horizontal" className="spacing">
         <Stack gap={3} className="col-md-5">
-          {workouts.length && workouts.map((workout) => (
+          {!!workouts.length && workouts.map((workout) => (
             <WorkoutDetails key={workout._id} workout={workout} />
           ))}
         </Stack>

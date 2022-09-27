@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 // get all workouts
 export const getAllWorkouts = async (req: Request, res: Response) => {
-  const workouts = await Workout.find({}).sort({ createdAt: 'asc' });
+  const workouts = await Workout.find({}).sort({ createdAt: 'desc' });
   res.status(200).json({ workouts });
 }
 

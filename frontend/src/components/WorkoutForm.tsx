@@ -43,8 +43,7 @@ const WorkoutForm: FC = () => {
   return (
     <Form 
       onSubmit={handleSubmit} 
-      className="p-4 border border-1border-light rounded"
-      style={{ minWidth: '22rem', boxShadow: '2px 2px 5px rgba(0,0,0,0.25)' }}
+      className="p-4 border border-1 border-light rounded form"
     >
       <Form.Group className="mb-3 d-flex flex-column align-items-start" controlId="formBasicName">
         <Form.Label className="text-left">Name of workout:</Form.Label>

@@ -5,7 +5,7 @@ import './styles.css';
 
 const WorkoutDetails: React.FC<IProps> = ({ workout }) => {
   return (
-    <Card  className="me-3" style={{ width: '100%', boxShadow: '2px 2px 5px rgba(0,0,0,0.25)' }}>
+    <Card  className="details">
       <Card.Body>
         <Card.Title className="title">{workout.title}</Card.Title>
         <Card.Text className="subtitle"><span className="me-3 text-muted">Repetitions: </span>{String(workout.repetitions)}</Card.Text>

@@ -25,3 +25,14 @@
   text-align: left;
   margin-bottom: 8px;
 }
+
+.form {
+  min-width: 22rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  background-color: white;
+}
+
+.details {
+  width: 100%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+}
