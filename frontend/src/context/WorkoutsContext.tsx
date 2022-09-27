@@ -12,6 +12,10 @@ const workoutReducer = (state: IState, action: Actions) => {
       return { workouts: action.payload };
     case ACTIONS.CREATE_WORKOUT:
       return { workouts: [action.payload, ...state.workouts]};
+    case ACTIONS.UPDATE_WORKOUT:
+      //@ts-ignore
+      const filteredState = state.workouts.filter((workout) => workout._id !== action.payload._id)
+      return { workouts: [action.payload, ...filteredState ] };
     case ACTIONS.DELETE_WORKOUT:
       //@ts-ignore
       return { workouts: state.workouts.filter((workout) => workout._id !== action.payload._id) };

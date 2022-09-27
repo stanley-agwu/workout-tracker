@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { IProps } from '../types';
 import { ReactComponent as DeleteIcon } from '../assets/delete.svg';
+import { ReactComponent as EditIcon } from '../assets/edit.svg';
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import { ENDPOINTS } from '../constants';
 
-const WorkoutDetails: React.FC<IProps> = ({ workout }) => {
+const WorkoutDetails: React.FC<IProps> = ({ workout, handleEdit }) => {
    const { dispatch } = useWorkoutsContext();
 
   const handleDelete = async () => {
@@ -37,6 +38,7 @@ const WorkoutDetails: React.FC<IProps> = ({ workout }) => {
       </Card.Body>
       <div className="icons">
         <span className="delete"><DeleteIcon width="20" height="20" onClick={handleDelete} /></span>
+        <span className="edit"><EditIcon width="20" height="20" onClick={() => handleEdit(workout)} /></span>
       </div>
     </Card>
   );

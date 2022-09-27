@@ -9,6 +9,7 @@ export type Workout = {
 
 export interface IProps {
   workout: Workout;
+  handleEdit: React.Dispatch<React.SetStateAction<Workout | undefined>>;
 }
 
 export interface IState {
@@ -18,6 +19,10 @@ export interface IState {
 export interface IContextProps {
   state: IState;
   dispatch: React.Dispatch<Actions>;
+}
+
+export interface IFormProps {
+  workout: Workout | undefined;
 }
 
 export interface ISetWorkout {
@@ -35,4 +40,9 @@ export interface IDeleteWorkout {
   payload: Workout;
 }
 
-export type Actions = ISetWorkout | ICreateWorkout | IDeleteWorkout;
+export interface IUpdateWorkout {
+  type: 'UPDATE_WORKOUT';
+  payload: Workout;
+}
+
+export type Actions = ISetWorkout | ICreateWorkout | IDeleteWorkout | IUpdateWorkout;

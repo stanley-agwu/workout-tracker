@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
@@ -6,8 +6,9 @@ import Alert from 'react-bootstrap/Alert';
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import { ENDPOINTS } from '../constants';
+import { IFormProps, Workout } from '../types';
 
-const WorkoutForm: FC = () => {
+const WorkoutForm: FC<IFormProps> = ({ workout}) => {
   const [title, setTitle] = useState<string>();
   const [repetitions, setRepetitions] = useState<string>();
   const [load, setLoad] = useState<string>();
@@ -15,34 +16,53 @@ const WorkoutForm: FC = () => {
   const [showError, setShowError] = useState<boolean>(true);
   const [fieldError, setFieldError] = useState<string[]>([]);
 
+  useEffect(() => {
+    const editHandler = (workout: Workout) => {
+      setTitle(workout.title);
+      setRepetitions(String(workout.repetitions));
+      setLoad(String(workout.load));
+    };
+    if (workout) editHandler(workout);
+  }, [workout])
+
   const { dispatch } = useWorkoutsContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const body = { title, repetitions, load};
 
-    const response = await fetch(ENDPOINTS.BASE_URL, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+      const response = workout && workout._id
+        ? await fetch(`${ENDPOINTS.BASE_URL}${workout._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(body),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        : await fetch(ENDPOINTS.BASE_URL, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+      const results = await response.json();
+      if (!response.ok) {
+        setError(results.error);
+        setShowError(true);
+        setFieldError(results.fields);
       }
-    })
-    const results = await response.json();
-    console.log(results);
-    if (!response.ok) {
-      setError(results.error);
-      setShowError(true);
-      setFieldError(results.fields);
-    }
-    if (response.ok) {
-      setError(null);
-      setFieldError([]);
-      setTitle('');
-      setRepetitions('');
-      setLoad('');
-      dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });
-    }
+      if (response.ok) {
+        setError(null);
+        setFieldError([]);
+        setTitle('');
+        setRepetitions('');
+        setLoad('');
+        workout && workout._id
+        ? dispatch({ type: 'UPDATE_WORKOUT', payload: results.workout })
+        : dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });
+      }
   }
 
   return (

@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 // get all workouts
 export const getAllWorkouts = async (req: Request, res: Response) => {
-  const workouts = await Workout.find({}).sort({ createdAt: 'desc' });
+  const workouts = await Workout.find({}).sort({ updatedAt: 'desc' });
   res.status(200).json({ workouts });
 }
 
@@ -66,7 +66,7 @@ export const updateWorkout = async (req: Request, res: Response) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Invalid id, no such workout' });
   }
-  const workout = await Workout.findByIdAndUpdate(id, { ...req.body });
+  const workout = await Workout.findByIdAndUpdate(id, { ...req.body }, { new: true });
   if (!workout) {
     return res.status(404).json({ error: 'workout not found' });
   }

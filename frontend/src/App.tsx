@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './pages/Home';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
