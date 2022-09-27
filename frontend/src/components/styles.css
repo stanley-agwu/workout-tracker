@@ -35,4 +35,20 @@
 .details {
   width: 100%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.details .card {
+  width: 90%;
+  border: transparent;
+}
+
+.details .icons {
+  width: 10%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+  cursor: pointer;
 }

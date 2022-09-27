@@ -12,7 +12,7 @@ export interface IProps {
 }
 
 export interface IState {
-  workouts: Workout[] | [];
+  workouts: Workout[];
 }
 
 export interface IContextProps {
@@ -30,4 +30,9 @@ export interface ICreateWorkout {
   payload: Workout;
 }
 
-export type Actions = ISetWorkout | ICreateWorkout;
+export interface IDeleteWorkout {
+  type: 'DELETE_WORKOUT';
+  payload: Workout;
+}
+
+export type Actions = ISetWorkout | ICreateWorkout | IDeleteWorkout;
