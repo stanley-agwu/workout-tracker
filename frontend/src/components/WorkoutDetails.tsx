@@ -1,6 +1,8 @@
 import Card from 'react-bootstrap/Card';
-import { IProps } from '../types';
+import { formatDistanceToNow } from 'date-fns'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { IProps } from '../types';
 import { ReactComponent as DeleteIcon } from '../assets/delete.svg';
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
@@ -24,11 +26,17 @@ const WorkoutDetails: React.FC<IProps> = ({ workout }) => {
         <Card.Title className="title">{workout.title}</Card.Title>
         <Card.Text className="subtitle"><span className="me-3 text-muted">Repetitions: </span>{String(workout.repetitions)}</Card.Text>
         <Card.Text className="subtitle"><span className="me-3 text-muted">Load (kg): </span>{String(workout.load)}</Card.Text>
-        <Card.Text className="subtitle"><span className="me-3 text-muted">Date created: </span>{workout.createdAt}</Card.Text>
-        <Card.Text className="subtitle"><span className="me-3 text-muted">Date updated: </span>{workout.updatedAt}</Card.Text>
+        <Card.Text className="subtitle">
+          <span className="me-3 text-muted">First created: </span>
+          {formatDistanceToNow(new Date(workout.createdAt), {addSuffix: true})}
+        </Card.Text>
+        <Card.Text className="subtitle">
+          <span className="me-3 text-muted">Last updated: </span>
+          {formatDistanceToNow(new Date(workout.updatedAt), {addSuffix: true})}
+        </Card.Text>
       </Card.Body>
       <div className="icons">
-        <DeleteIcon width="23" height="23" onClick={handleDelete} />
+        <span className="delete"><DeleteIcon width="20" height="20" onClick={handleDelete} /></span>
       </div>
     </Card>
   );

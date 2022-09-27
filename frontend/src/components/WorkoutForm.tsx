@@ -64,7 +64,7 @@ const WorkoutForm: FC = () => {
       <Form.Group className="inputField" controlId="formBasicRepetitions">
         <Form.Label>Repetitions of workout:</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           value={repetitions}
           onChange={(e) => setRepetitions(e.target.value)}
           placeholder="Enter workout count"
@@ -74,7 +74,7 @@ const WorkoutForm: FC = () => {
       <Form.Group className="inputField" controlId="formBasicLoad">
         <Form.Label>Workout load (in Kg):</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           value={load}
           onChange={(e) => setLoad(e.target.value)}
           placeholder="Enter workout load"

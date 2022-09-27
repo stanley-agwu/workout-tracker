@@ -53,6 +53,24 @@
   cursor: pointer;
 }
 
+.delete {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete:hover, .delete:active {
+  background-color: #ff3333;
+}
+
+.delete:hover, svg:hover {
+  fill: #FFFFFF;
+}
+
 .inputField {
   display: flex;
   flex-direction: column;
