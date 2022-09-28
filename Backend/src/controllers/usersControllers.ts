@@ -10,21 +10,31 @@ const createToken = (_id: string) => {
 }
 
 export const signup = async (req: Request, res: Response) => {
-  const { email } = req.body;
-
   try {
     const user = await User.signup(req.body);
+    const { email } = user;
 
     const token = createToken(user._id);
 
     res.status(200).json({ email, token, user })
   } catch (error) {
     if (error instanceof Error) {
-      res.status(500).json({ error: error.message })
+      res.status(400).json({ error: error.message })
     }
   }
 };
 
 export const signin = async (req: Request, res: Response) => {
-  res.send('login created!');
+  try {
+    const user = await User.signin(req.body);
+    const { email } = user;
+
+    const token = createToken(user._id);
+
+    res.status(200).json({ email, token, user })
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message })
+    }
+  }
 };

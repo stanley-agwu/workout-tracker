@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import isEmail from 'validator/lib/isEmail';
 import isStrongPassword from 'validator/lib/isStrongPassword';
 
-import { IUser } from "../types";
+import { IUser, Login, ILogin } from "../types";
 
 const userSchema = new mongoose.Schema<IUser>({
   email: {
@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema<IUser>({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -33,6 +34,7 @@ userSchema.statics.signup = async function ({ email, username, password }: IUser
   const userExist = await this.findOne({ email });
   
   if (userExist) throw new Error('User with email already exists');
+
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
@@ -40,5 +42,21 @@ userSchema.statics.signup = async function ({ email, username, password }: IUser
 
   return user;
 };
+
+// static signin method
+userSchema.statics.signin = async function ({ email, username, password}: ILogin) {
+    //validation
+  if ((!email && !username) || !password) {
+    throw new Error('All fields are required');
+  }
+  const user: ILogin = email ? await this.findOne({ email })
+                              : await this.findOne({ username });
+  if (!user) throw new Error(email ? 'Incorrect email' : 'Incorrect username');
+
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) throw new Error('Invalid password');
+
+  return user;
+}
 
 module.exports = mongoose.model<IUser>('User', userSchema);
