@@ -1,7 +1,8 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import connectDB from './db/db';
 
-import WorkoutRoutes from './routes';
+import WorkoutsRoutes from './routes/workouts';
+import UsersRoutes from './routes/users';
 
 const app: Application  = express();
 
@@ -14,7 +15,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 // routes
-app.use('/api/workouts', WorkoutRoutes);
+app.use('/api/workouts', WorkoutsRoutes);
+app.use('/api/users', UsersRoutes);
 
 // connect to database
 connectDB();
