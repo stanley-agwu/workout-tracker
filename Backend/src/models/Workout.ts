@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { IWorkout } from "../types";
 
-const workoutSchema = new mongoose.Schema({
+const workoutSchema = new mongoose.Schema<IWorkout>({
   title: {
     type: String,
     required: true,
@@ -15,4 +16,4 @@ const workoutSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model('Workout', workoutSchema);
+export default mongoose.model<IWorkout>('Workout', workoutSchema);
