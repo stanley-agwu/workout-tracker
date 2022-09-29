@@ -8,8 +8,6 @@ export const AuthContext = createContext({} as IUserContext);
 const initState: IUser = { user: null };
 const userReducer = (state: User, action: UserActions) => {
   switch(action.type) {
-    case ACTIONS.SIGNUP:
-      return { user: action.payload };
     case ACTIONS.SIGNIN:
       return { user: action.payload };
     case ACTIONS.SIGNOUT:

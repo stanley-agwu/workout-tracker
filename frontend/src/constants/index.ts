@@ -3,11 +3,12 @@ export const ACTIONS = {
   CREATE_WORKOUT: 'CREATE_WORKOUT',
   DELETE_WORKOUT: 'DELETE_WORKOUT',
   UPDATE_WORKOUT: 'UPDATE_WORKOUT',
-  SIGNUP: 'SIGNUP',
   SIGNIN: 'SIGNIN',
   SIGNOUT: 'SIGNOUT',
 }
 
 export const ENDPOINTS = {
   BASE_URL: '/api/workouts/',
+  SIGNUP: 'api/users/signup',
+  SIGNIN: 'api/users/signin',
 }

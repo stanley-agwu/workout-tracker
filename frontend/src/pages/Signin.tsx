@@ -12,7 +12,7 @@ const Signin: FC = () => {
       <div className="form-title"><h3>Sign in to Freak workouts</h3></div>
       <div className="signin">
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label className="signin-text">Username or email address</Form.Label>
             <Form.Control type="email" value={name} onChange={(e) => setName(e.target.value)} />
           </Form.Group>
