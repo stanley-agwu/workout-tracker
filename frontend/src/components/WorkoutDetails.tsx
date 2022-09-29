@@ -37,8 +37,8 @@ const WorkoutDetails: React.FC<IProps> = ({ workout, handleEdit }) => {
         </Card.Text>
       </Card.Body>
       <div className="icons">
-        <span className="delete"><DeleteIcon width="20" height="20" onClick={handleDelete} /></span>
-        <span className="edit"><EditIcon width="20" height="20" onClick={() => handleEdit(workout)} /></span>
+        <button className="delete" onClick={handleDelete}><DeleteIcon width="20" height="20" /></button>
+        <button className="edit" onClick={() => handleEdit(workout)}><EditIcon width="20" height="20" /></button>
       </div>
     </Card>
   );
