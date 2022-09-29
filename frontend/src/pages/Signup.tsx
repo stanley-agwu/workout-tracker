@@ -2,7 +2,8 @@ import React, { FC, useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-import { useSignup } from '../hooks/useSignup';
+import { useLogin } from '../hooks/useLogin';
+import { ENDPOINTS } from '../constants'
 
 const Signup: FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -10,12 +11,12 @@ const Signup: FC = () => {
   const [password, setPassword] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
 
-  const {execute, isLoading, error, status } = useSignup();
+  const {execute, isLoading, error, status } = useLogin();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    await execute(email, username, password);
+    await execute(ENDPOINTS.SIGNUP, email, username, password);
   }
   useEffect(() => {
     if (error) setShowError(true);

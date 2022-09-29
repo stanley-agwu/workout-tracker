@@ -1,24 +1,30 @@
 import { useState } from 'react';
-import { ENDPOINTS } from '../constants';
 import { useAuthContext } from './useAuthContext';
 
 
-export const useSignup = () => {
+export const useLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
   const [status, setStatus] = useState<string>();
 
   const { dispatch } = useAuthContext();
 
-  const execute = async (...args: (string|undefined)[]) => {
+  const execute = async (url: string, ...args: (string|undefined)[]) => {
     setIsLoading(true);
     setStatus('loading');
     setError(undefined);
-    const [email, username, password] = args;
+    let body;
+    if (args.length === 2) {
+      const [identifier, password] = args;
+      body = { identifier, password };
+    } else {
+      const [email, username, password] = args;
+      body = { email, username, password };
+    }
 
-    const response = await fetch(ENDPOINTS.SIGNUP, {
+    const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({email, username, password}),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
       }

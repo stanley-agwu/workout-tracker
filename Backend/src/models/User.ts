@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import isEmail from 'validator/lib/isEmail';
 import isStrongPassword from 'validator/lib/isStrongPassword';
 
-import { IUser, Login, ILogin } from "../types";
+import { IUser, ILogin } from "../types";
 
 const userSchema = new mongoose.Schema<IUser>({
   email: {
@@ -44,14 +44,15 @@ userSchema.statics.signup = async function ({ email, username, password }: IUser
 };
 
 // static signin method
-userSchema.statics.signin = async function ({ email, username, password}: ILogin) {
+userSchema.statics.signin = async function ({ identifier, password}: ILogin) {
     //validation
-  if ((!email && !username) || !password) {
+  if ((!identifier) || !password) {
     throw new Error('All fields are required');
   }
-  const user: ILogin = email ? await this.findOne({ email })
-                              : await this.findOne({ username });
-  if (!user) throw new Error(email ? 'Incorrect email' : 'Incorrect username');
+  const isIdentifierEmail = isEmail(identifier);
+  const user: ILogin = isIdentifierEmail ? await this.findOne({ email: identifier })
+                              : await this.findOne({ username: identifier });
+  if (!user) throw new Error(isIdentifierEmail ? 'Incorrect email' : 'Incorrect username');
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) throw new Error('Invalid password');
