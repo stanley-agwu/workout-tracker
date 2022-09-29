@@ -1,10 +1,12 @@
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Nav, Navbar, Button } from 'react-bootstrap';
 
 import './styles.css';
+import { useLogout } from '../hooks/useLogout';
 
 const NavBar: React.FC = () => {
+  const { execute: handleLogout } = useLogout();
+
   return (
     <Navbar bg="dark" variant="dark" expand="sm" fixed="top">
       <Container fluid>
@@ -19,6 +21,7 @@ const NavBar: React.FC = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#">About</Nav.Link>
           </Nav>
+          <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
           <Nav
             className="ms-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
