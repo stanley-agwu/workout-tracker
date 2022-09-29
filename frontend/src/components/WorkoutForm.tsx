@@ -101,8 +101,8 @@ const WorkoutForm: FC<IFormProps> = ({ workout}) => {
           className={fieldError?.includes('load') ? 'field-error' : ''}
         />
       </Form.Group>
-      <Button variant="success" type="submit" style={{ width: "100%" }}>
-        Submit
+      <Button variant="success" type="submit" className="button-full">
+        Add workout
       </Button>
       {error && showError && (
         <Alert

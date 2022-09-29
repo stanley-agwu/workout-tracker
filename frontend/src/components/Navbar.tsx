@@ -2,6 +2,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+import './styles.css';
+
 const NavBar: React.FC = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="sm" fixed="top">
@@ -15,7 +17,15 @@ const NavBar: React.FC = () => {
             navbarScroll
           >
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#action2">About</Nav.Link>
+            <Nav.Link href="#">About</Nav.Link>
+          </Nav>
+          <Nav
+            className="ms-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Nav.Link href="/signin">Sign in</Nav.Link>
+            <Nav.Link href="/signup">Sign up</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

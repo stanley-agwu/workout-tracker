@@ -96,3 +96,9 @@
 .field-error {
   border: 1px solid #ff3333;
 }
+
+.button-full {
+  width: 100%;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
