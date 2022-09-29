@@ -1,12 +1,12 @@
 import React, { FC, createContext, useReducer } from "react";
 import { ACTIONS } from "../constants";
-import { IContextProps, Actions, IState } from "../types";
+import { IWorkoutContext, WorkoutActions, IWorkoutState } from "../types";
 
-export const WorkoutsContext = createContext({} as IContextProps);
+export const WorkoutsContext = createContext({} as IWorkoutContext);
 
-const initState: IState = { workouts: [] };
+const initState: IWorkoutState = { workouts: [] };
 
-const workoutReducer = (state: IState, action: Actions) => {
+const workoutReducer = (state: IWorkoutState, action: WorkoutActions) => {
   switch(action.type) {
     case ACTIONS.SET_WORKOUTS:
       return { workouts: action.payload };
@@ -23,7 +23,7 @@ const workoutReducer = (state: IState, action: Actions) => {
   }
 }
 
-export const WorkoutContextProvider: FC<React.PropsWithChildren> = ({ children }) => {
+export const WorkoutsContextProvider: FC<React.PropsWithChildren> = ({ children }) => {
   //@ts-ignore
   const [state, dispatch] = useReducer(workoutReducer, initState);
   return (

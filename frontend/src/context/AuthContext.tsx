@@ -1,0 +1,31 @@
+import React, { FC, createContext, useReducer } from 'react';
+import { ACTIONS } from '../constants';
+
+import { User, IUser, UserActions, IUserContext } from '../types';
+
+export const AuthContext = createContext({} as IUserContext);
+
+const initState: IUser = { user: null };
+const userReducer = (state: User, action: UserActions) => {
+  switch(action.type) {
+    case ACTIONS.SIGNUP:
+      return { user: action.payload };
+    case ACTIONS.SIGNIN:
+      return { user: action.payload };
+    case ACTIONS.SIGNOUT:
+      return { user: null };
+    default:
+      return state;
+  }
+}
+
+export const AuthContextProvider: FC<React.PropsWithChildren> = ({ children }) => {
+  //@ts-ignore
+  const [state, dispatch] = useReducer(userReducer, initState);
+
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  )
+};

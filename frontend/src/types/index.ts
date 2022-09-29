@@ -12,13 +12,13 @@ export interface IProps {
   handleEdit: React.Dispatch<React.SetStateAction<Workout | undefined>>;
 }
 
-export interface IState {
+export interface IWorkoutState {
   workouts: Workout[];
 }
 
-export interface IContextProps {
-  state: IState;
-  dispatch: React.Dispatch<Actions>;
+export interface IWorkoutContext {
+  state: IWorkoutState;
+  dispatch: React.Dispatch<WorkoutActions>;
 }
 
 export interface IFormProps {
@@ -45,4 +45,36 @@ export interface IUpdateWorkout {
   payload: Workout;
 }
 
-export type Actions = ISetWorkout | ICreateWorkout | IDeleteWorkout | IUpdateWorkout;
+export type WorkoutActions = ISetWorkout | ICreateWorkout | IDeleteWorkout | IUpdateWorkout;
+
+export type User = {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export interface IUser {
+  user: User | null;
+}
+
+export interface ISignin {
+  type: 'SIGNIN';
+  payload: User;
+}
+
+export interface ISignup {
+  type: 'SIGNUP';
+  payload: User;
+}
+
+export interface ISignout {
+  type: 'SIGNOUT';
+  payload: null;
+}
+
+export interface IUserContext {
+  state: User;
+  dispatch: React.Dispatch<UserActions>;
+}
+
+export type UserActions = ISignup | ISignin | ISignout;
