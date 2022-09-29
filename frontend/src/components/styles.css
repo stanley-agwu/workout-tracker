@@ -102,3 +102,15 @@
   font-weight: 600;
   margin-top: 0.5rem;
 }
+
+.username {
+  color: #73808c;
+  display: flex;
+  align-items: center;
+  margin-right: 8rem;
+  cursor: pointer;
+}
+
+.username:hover, .username:focus, .username:active {
+  color: #FFFFFF;
+}

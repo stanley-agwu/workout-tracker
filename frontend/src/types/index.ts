@@ -73,7 +73,7 @@ export interface ISignout {
 }
 
 export interface IUserContext {
-  state: User;
+  state: IUser;
   dispatch: React.Dispatch<UserActions>;
 }
 

@@ -3,9 +3,12 @@ import { Nav, Navbar, Button } from 'react-bootstrap';
 
 import './styles.css';
 import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const NavBar: React.FC = () => {
   const { execute: handleLogout } = useLogout();
+  const { state: { user} } = useAuthContext();
+  console.log(user);
 
   return (
     <Navbar bg="dark" variant="dark" expand="sm" fixed="top">
@@ -21,14 +24,29 @@ const NavBar: React.FC = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#">About</Nav.Link>
           </Nav>
-          <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
           <Nav
             className="ms-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/signin">Sign in</Nav.Link>
-            <Nav.Link href="/signup">Sign up</Nav.Link>
+            {user && (
+              <>
+                <span className="username">{user.username}</span>
+                <Button
+                  variant="outline-secondary"
+                  onClick={handleLogout}
+                  className="me-4"
+                >
+                  Logout
+                </Button>
+              </>
+              )}
+            {!user && (
+              <>
+                <Nav.Link href="/signin">Sign in</Nav.Link>
+                <Nav.Link href="/signup" className="mx-4 ps-4">Sign up</Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

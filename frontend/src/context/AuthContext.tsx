@@ -1,12 +1,12 @@
 import React, { FC, createContext, useReducer } from 'react';
 import { ACTIONS } from '../constants';
 
-import { User, IUser, UserActions, IUserContext } from '../types';
+import { IUser, UserActions, IUserContext } from '../types';
 
 export const AuthContext = createContext({} as IUserContext);
 
 const initState: IUser = { user: null };
-const userReducer = (state: User, action: UserActions) => {
+const userReducer = (state: IUser, action: UserActions) => {
   switch(action.type) {
     case ACTIONS.SIGNIN:
       return { user: action.payload };
