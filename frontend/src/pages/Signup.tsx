@@ -5,12 +5,12 @@ import Alert from 'react-bootstrap/Alert';
 import { useSignup } from '../hooks/useSignup';
 
 const Signup: FC = () => {
-  const [email, setEmail] = useState<string>();
-  const [username, setUsername] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
 
-  const {execute, isLoading, error } = useSignup();
+  const {execute, isLoading, error, status } = useSignup();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +19,12 @@ const Signup: FC = () => {
   }
   useEffect(() => {
     if (error) setShowError(true);
-  }, [error])
+    if (status === 'success') {
+      setEmail('');
+      setUsername('');
+      setPassword('');
+    }
+  }, [error, status])
   return (
     <>
       <div className="form-title"><h3>Sign up to Freak workouts</h3></div>
