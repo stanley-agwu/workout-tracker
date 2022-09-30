@@ -9,7 +9,8 @@ import Signup from './pages/Signup';
 import { useAuthContext } from './hooks/useAuthContext';
 
 const App: React.FC = () => {
-  const { state: { user} } = useAuthContext();
+  const { state: { user } } = useAuthContext();
+
   return (
     <div className="App">
       <NavBar />
@@ -18,7 +19,6 @@ const App: React.FC = () => {
           <Route path="/" element={user ? <Home /> : <Navigate to="/signin" />} />
           <Route path="/signin" element={!user ? <Signin /> : <Navigate to="/" />} />
           <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
-          <Route path="*" element={<p>Path not resolved</p>} />
         </Routes>
       </BrowserRouter>
     </div>

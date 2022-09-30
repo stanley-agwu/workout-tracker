@@ -1,7 +1,7 @@
 import React, { FC, createContext, useReducer, useEffect } from 'react';
 import { ACTIONS } from '../constants';
 
-import { IUser, UserActions, IUserContext } from '../types';
+import { IUser, User, UserActions, IUserContext } from '../types';
 
 export const AuthContext = createContext({} as IUserContext);
 
@@ -19,7 +19,7 @@ const userReducer = (state: IUser, action: UserActions) => {
 
 export const AuthContextProvider: FC<React.PropsWithChildren> = ({ children }) => {
   useEffect(() => {
-    const { user }: IUser = JSON.parse(localStorage.getItem('user') || 'false');
+    const user : User = JSON.parse(localStorage.getItem('user') || 'false');
 
     if (user) {
       dispatch({ type: 'SIGNIN', payload: user });

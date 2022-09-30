@@ -7,14 +7,19 @@ import { ReactComponent as DeleteIcon } from '../assets/delete.svg';
 import { ReactComponent as EditIcon } from '../assets/edit.svg';
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { ENDPOINTS } from '../constants';
 
 const WorkoutDetails: React.FC<IProps> = ({ workout, handleEdit }) => {
    const { dispatch } = useWorkoutsContext();
+   const { state: { user } } = useAuthContext();
 
   const handleDelete = async () => {
     const response = await fetch(`${ENDPOINTS.BASE_URL}/${workout._id}`, {
       method: 'DELETE',
+      headers: {
+        'authorization': `Bearer ${user!.token}`,
+      }
     });
     const results = await response.json();
     if (response.ok) {

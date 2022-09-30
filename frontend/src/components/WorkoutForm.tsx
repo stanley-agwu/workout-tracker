@@ -5,6 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 
 import './styles.css';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { ENDPOINTS } from '../constants';
 import { IFormProps, Workout } from '../types';
 
@@ -15,6 +16,8 @@ const WorkoutForm: FC<IFormProps> = ({ workout}) => {
   const [error, setError] = useState<any|null>(null);
   const [showError, setShowError] = useState<boolean>(true);
   const [fieldError, setFieldError] = useState<string[]>([]);
+
+  const { state: { user } } = useAuthContext();
 
   useEffect(() => {
     const editHandler = (workout: Workout) => {
@@ -32,37 +35,39 @@ const WorkoutForm: FC<IFormProps> = ({ workout}) => {
 
     const body = { title, repetitions, load};
 
-      const response = workout && workout._id
-        ? await fetch(`${ENDPOINTS.BASE_URL}${workout._id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(body),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-        : await fetch(ENDPOINTS.BASE_URL, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-      const results = await response.json();
-      if (!response.ok) {
-        setError(results.error);
-        setShowError(true);
-        setFieldError(results.fields);
-      }
-      if (response.ok) {
-        setError(null);
-        setFieldError([]);
-        setTitle('');
-        setRepetitions('');
-        setLoad('');
-        workout && workout._id
-        ? dispatch({ type: 'UPDATE_WORKOUT', payload: results.workout })
-        : dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });
-      }
+    const response = workout && workout._id
+      ? await fetch(`${ENDPOINTS.BASE_URL}${workout._id}`, {
+          method: 'PATCH',
+          body: JSON.stringify(body),
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${user!.token}`
+          }
+        })
+      : await fetch(ENDPOINTS.BASE_URL, {
+          method: 'POST',
+          body: JSON.stringify(body),
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${user!.token}`
+          }
+        })
+    const results = await response.json();
+    if (!response.ok) {
+      setError(results.error);
+      setShowError(true);
+      setFieldError(results.fields);
+    }
+    if (response.ok) {
+      setError(null);
+      setFieldError([]);
+      setTitle('');
+      setRepetitions('');
+      setLoad('');
+      workout && workout._id
+      ? dispatch({ type: 'UPDATE_WORKOUT', payload: results.workout })
+      : dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });
+    }
   }
 
   return (
