@@ -28,7 +28,7 @@ const Home: FC = () => {
     <Container>
       <Stack gap={4} direction="horizontal" className="spacing">
         <Stack gap={3} className="col-md-5">
-          {!!workouts.length && workouts.map((workout) => (
+          {Boolean(workouts.length) && workouts.map((workout) => (
             <WorkoutDetails key={workout._id} workout={workout} handleEdit={setEditWorkout} />
           ))}
         </Stack>

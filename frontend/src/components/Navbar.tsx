@@ -8,7 +8,6 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const NavBar: React.FC = () => {
   const { execute: handleLogout } = useLogout();
   const { state: { user} } = useAuthContext();
-  console.log(user);
 
   return (
     <Navbar bg="dark" variant="dark" expand="sm" fixed="top">

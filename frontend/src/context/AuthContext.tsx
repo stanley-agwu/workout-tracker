@@ -1,4 +1,4 @@
-import React, { FC, createContext, useReducer } from 'react';
+import React, { FC, createContext, useReducer, useEffect } from 'react';
 import { ACTIONS } from '../constants';
 
 import { IUser, UserActions, IUserContext } from '../types';
@@ -18,7 +18,14 @@ const userReducer = (state: IUser, action: UserActions) => {
 }
 
 export const AuthContextProvider: FC<React.PropsWithChildren> = ({ children }) => {
-  //@ts-ignore
+  useEffect(() => {
+    const { user }: IUser = JSON.parse(localStorage.getItem('user') || 'false');
+
+    if (user) {
+      dispatch({ type: 'SIGNIN', payload: user });
+    }
+  }, []);
+
   const [state, dispatch] = useReducer(userReducer, initState);
 
   return (
