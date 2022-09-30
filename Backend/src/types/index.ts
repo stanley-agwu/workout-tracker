@@ -2,6 +2,7 @@ export interface IWorkout {
   title: string;
   repetitions: number;
   load: number;
+  user_id: string;
 }
 
 export interface IUser {
