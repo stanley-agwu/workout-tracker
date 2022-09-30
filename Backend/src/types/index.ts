@@ -14,3 +14,7 @@ export interface ILogin {
   identifier: string;
   password: string;
 }
+
+export interface IUserPayload {
+  _id: string;
+}
