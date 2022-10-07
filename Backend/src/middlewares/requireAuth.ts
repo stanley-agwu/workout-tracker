@@ -7,7 +7,7 @@ import { IUserPayload } from '../types';
 export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
 
-  if (!authorization) {
+  if (!authorization || !authorization?.startsWith('Bearer')) {
     return res.status(401).json({ error: 'Authorization token required'})
   }
 
