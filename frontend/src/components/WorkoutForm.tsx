@@ -9,7 +9,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { ENDPOINTS } from '../constants';
 import { IFormProps, Workout } from '../types';
 
-const WorkoutForm: FC<IFormProps> = ({ workout}) => {
+const WorkoutForm: FC<IFormProps> = ({ workout, setEditWorkout }) => {
   const [title, setTitle] = useState<string>();
   const [repetitions, setRepetitions] = useState<string>();
   const [load, setLoad] = useState<string>();
@@ -64,6 +64,7 @@ const WorkoutForm: FC<IFormProps> = ({ workout}) => {
       setTitle('');
       setRepetitions('');
       setLoad('');
+      setEditWorkout(undefined);
       workout && workout._id
       ? dispatch({ type: 'UPDATE_WORKOUT', payload: results.workout })
       : dispatch({ type: 'CREATE_WORKOUT', payload: results.workout });

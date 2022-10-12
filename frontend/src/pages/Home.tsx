@@ -39,7 +39,7 @@ const Home: FC = () => {
           ))}
         </Stack>
         <Stack className="col-xs-5">
-          <WorkoutForm workout={editWorkout} />
+          <WorkoutForm workout={editWorkout} setEditWorkout={setEditWorkout} />
         </Stack>
       </Stack>
     </Container>

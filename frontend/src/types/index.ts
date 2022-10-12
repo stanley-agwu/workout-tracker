@@ -23,6 +23,7 @@ export interface IWorkoutContext {
 
 export interface IFormProps {
   workout: Workout | undefined;
+  setEditWorkout: React.Dispatch<React.SetStateAction<Workout | undefined>>;
 }
 
 export interface ISetWorkout {
