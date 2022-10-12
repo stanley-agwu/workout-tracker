@@ -51,6 +51,7 @@ const Signin: FC = () => {
             onClose={() => setShowError(false)}
             dismissible
             className="mt-3 mx-auto p-0 mb-0"
+            data-testid="alert"
           >
             <Alert.Heading className="text-center pt-2">Error!</Alert.Heading>
             <span className="error">{error}</span>
