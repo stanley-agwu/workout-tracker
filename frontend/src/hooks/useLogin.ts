@@ -35,7 +35,11 @@ export const useLogin = () => {
       setError(results.error);
       setStatus('error');
     } else {
-      localStorage.setItem('user', JSON.stringify(results));
+      const user = {
+        id: results.user._id,
+        token: results.token,
+      };
+      localStorage.setItem('user', JSON.stringify(user));
       dispatch({ type: 'SIGNIN', payload: results });
       setIsLoading(false);
       setStatus('success');

@@ -1,7 +1,7 @@
 export type Workout = {
   title: string,
-  repetitions: number,
-  load: number,
+  repetitions: string,
+  load: string,
   _id: string,
   createdAt: string,
   updatedAt: string,
