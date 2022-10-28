@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot testing snapshot for app component 1`] = `
+<div
+  className="App"
+>
+  <nav
+    className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top"
+  >
+    <div
+      className="container-fluid"
+    >
+      <a
+        className="navbar-brand"
+        href="/"
+      >
+        Freak workouts
+      </a>
+      <button
+        aria-controls="navbarScroll"
+        aria-label="Toggle navigation"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        aria-expanded={null}
+        className="navbar-collapse collapse"
+        id="navbarScroll"
+      >
+        <div
+          className="me-auto my-2 my-lg-0 navbar-nav navbar-nav-scroll"
+          onKeyDown={[Function]}
+          style={
+            Object {
+              "maxHeight": "100px",
+            }
+          }
+        >
+          <a
+            className="nav-link"
+            data-rr-ui-event-key="/"
+            disabled={false}
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+          <a
+            className="nav-link"
+            data-rr-ui-event-key="#"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            About
+          </a>
+        </div>
+        <div
+          className="ms-auto my-2 my-lg-0 navbar-nav navbar-nav-scroll"
+          onKeyDown={[Function]}
+          style={
+            Object {
+              "maxHeight": "100px",
+            }
+          }
+        >
+          <a
+            className="nav-link"
+            data-rr-ui-event-key="/signin"
+            disabled={false}
+            href="/signin"
+            onClick={[Function]}
+          >
+            Sign in
+          </a>
+          <a
+            className="mx-4 ps-4 nav-link"
+            data-rr-ui-event-key="/signup"
+            disabled={false}
+            href="/signup"
+            onClick={[Function]}
+          >
+            Sign up
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
