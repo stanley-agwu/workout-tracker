@@ -41,7 +41,7 @@ const WorkoutForm: FC<IFormProps> = ({ workout, setEditWorkout }) => {
           body: JSON.stringify(body),
           headers: {
             'Content-Type': 'application/json',
-            'authorization': `Bearer ${user!.token}`
+            'authorization': `Bearer ${user!?.token}`
           }
         })
       : await fetch(ENDPOINTS.BASE_URL, {
@@ -49,7 +49,7 @@ const WorkoutForm: FC<IFormProps> = ({ workout, setEditWorkout }) => {
           body: JSON.stringify(body),
           headers: {
             'Content-Type': 'application/json',
-            'authorization': `Bearer ${user!.token}`
+            'authorization': `Bearer ${user!?.token}`
           }
         })
     const results = await response.json();
