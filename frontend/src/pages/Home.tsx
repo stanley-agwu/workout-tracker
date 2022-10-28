@@ -8,11 +8,27 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import './styles.css';
 import { ENDPOINTS } from '../constants';
 import { Workout } from '../types';
+import { useHomePage } from '../hooks/useHome';
 
 const Home: FC = () => {
   const {state: { workouts }, dispatch} = useWorkoutsContext();
   const [editWorkout, setEditWorkout] = useState<Workout>();
   const { state: { user } } = useAuthContext();
+
+  const {
+    title,
+    repetitions,
+    load,
+    error,
+    showError,
+    fieldError,
+    handleSubmit,
+    handleDelete,
+    setTitle,
+    setRepetitions,
+    setLoad,
+    setShowError,
+  } = useHomePage(editWorkout, setEditWorkout);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -35,11 +51,28 @@ const Home: FC = () => {
       <Stack gap={4} direction="horizontal" className="spacing">
         <Stack gap={3} className="col-md-5">
           {Boolean(workouts.length) && workouts.map((workout) => (
-            <WorkoutDetails key={workout._id} workout={workout} handleEdit={setEditWorkout} />
+            <WorkoutDetails
+              key={workout._id}
+              workout={workout}
+              handleEdit={setEditWorkout}
+              handleDelete={handleDelete}
+            />
           ))}
         </Stack>
         <Stack className="col-xs-5">
-          <WorkoutForm workout={editWorkout} setEditWorkout={setEditWorkout} />
+          <WorkoutForm
+            title={title}
+            repetitions={repetitions}
+            load={load}
+            error={error}
+            showError={showError}
+            fieldError={fieldError}
+            setTitle={setTitle}
+            setRepetitions={setRepetitions}
+            setLoad={setLoad}
+            setShowError={setShowError}
+            handleSubmit={handleSubmit}
+        />
         </Stack>
       </Stack>
     </Container>

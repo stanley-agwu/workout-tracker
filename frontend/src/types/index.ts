@@ -7,9 +7,27 @@ export type Workout = {
   updatedAt: string,
 }
 
-export interface IProps {
+export interface IFormProps {
+  title: string | undefined,
+  repetitions: string | undefined,
+  load: string | undefined,
+  error: any | null,
+  showError: Boolean;
+  fieldError: string[],
+  setTitle: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setRepetitions: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setLoad: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setShowError: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
+  createdAt?: string;
+  updatedAt?: string;
+  _id?: string;
+}
+
+export interface IHookProps {
   workout: Workout;
   handleEdit: React.Dispatch<React.SetStateAction<Workout | undefined>>;
+  handleDelete: (workout: Workout) => Promise<void>;
 }
 
 export interface IWorkoutState {
@@ -19,11 +37,6 @@ export interface IWorkoutState {
 export interface IWorkoutContext {
   state: IWorkoutState;
   dispatch: React.Dispatch<WorkoutActions>;
-}
-
-export interface IFormProps {
-  workout: Workout | undefined;
-  setEditWorkout: React.Dispatch<React.SetStateAction<Workout | undefined>>;
 }
 
 export interface ISetWorkout {
