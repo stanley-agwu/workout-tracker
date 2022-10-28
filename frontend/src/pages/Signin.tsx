@@ -24,8 +24,7 @@ const Signin: FC = () => {
       setName('');
       setPassword('');
     }
-  }, [error, status])
-
+  }, [error, status]);
 
   return (
     <>
