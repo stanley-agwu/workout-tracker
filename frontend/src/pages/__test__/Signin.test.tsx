@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '../../test-utils/testing-library-utils';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import Signin from '../Signin';
@@ -21,24 +21,30 @@ describe('signin form', () => {
     expect(passwordInputField).toHaveDisplayValue('');
     expect(signInButton).toBeInTheDocument();
   })
-  test('should be able to type a username', () => {
+  test('should fill form', () => {
     render(<MockedSignin />);
-    const emailInputField = screen.getByRole('textbox', { name: /username or email address/i });
-    userEvent.type(emailInputField, 'Gregory Warner')
+    const emailInputField = screen.getByRole('textbox', { name: 'Username or email address' });
+    const passwordInputField = screen.getByLabelText('Password');
+
+    userEvent.type(emailInputField, 'Gregory Warner');
+    userEvent.type(passwordInputField, 'password1');
+
     expect(emailInputField).toHaveDisplayValue('Gregory Warner');
-  })
-
-  test('should be able to type an email', () => {
-    render(<MockedSignin />);
-    const emailInputField = screen.getByRole('textbox', { name: /username or email address/i });
-    userEvent.type(emailInputField, 'gregory@gmail.com')
-    expect(emailInputField).toHaveDisplayValue('gregory@gmail.com');
-  })
-
-  test('should be able to type a password', () => {
-    render(<MockedSignin />);
-    const passwordInputField = screen.getByLabelText(/password/i);
-    userEvent.type(passwordInputField, 'password1')
     expect(passwordInputField).toHaveDisplayValue('password1');
+  })
+  
+  test.skip('succesful sign in', async () => {
+    render(<MockedSignin />);
+    const emailInputField = screen.getByRole('textbox', { name: 'Username or email address' });
+    const passwordInputField = screen.getByLabelText('Password');
+    const signInButton = screen.getByRole('button', { name: 'Sign in'});
+
+    userEvent.type(emailInputField, 'Gregory Warner');
+    userEvent.type(passwordInputField, 'password1');
+
+    userEvent.click(signInButton);
+
+    await waitFor (() => expect(screen.getByRole('textbox', { name: 'Username or email address' })).toHaveDisplayValue(''));
+    await waitFor (() => expect(screen.getByLabelText('Password')).toHaveDisplayValue(''));
   })
 })

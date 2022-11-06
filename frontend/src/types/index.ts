@@ -31,7 +31,7 @@ export interface IHookProps {
 }
 
 export interface IWorkoutState {
-  workouts: Workout[];
+  workouts: Workout[] | [];
 }
 
 export interface IWorkoutContext {

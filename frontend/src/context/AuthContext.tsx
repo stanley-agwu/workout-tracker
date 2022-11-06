@@ -3,7 +3,7 @@ import { ACTIONS } from '../constants';
 
 import { IUser, User, UserActions, IUserContext } from '../types';
 
-export const AuthContext = createContext({} as IUserContext);
+export const AuthContext = createContext<IUserContext | null>(null);
 
 const initState: IUser = { user: null };
 const userReducer = (state: IUser, action: UserActions) => {
