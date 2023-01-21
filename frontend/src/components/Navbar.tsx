@@ -35,6 +35,7 @@ const NavBar: React.FC = () => {
                   variant="outline-secondary"
                   onClick={handleLogout}
                   className="me-4"
+                  aria-label="Logout" 
                 >
                   Logout
                 </Button>

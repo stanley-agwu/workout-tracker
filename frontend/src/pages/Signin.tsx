@@ -40,7 +40,7 @@ const Signin: FC = () => {
             <Form.Label className="signin-text">Password</Form.Label>
             <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit" className="button-full" disabled={isLoading}>
+          <Button aria-label="Sign in" variant="primary" type="submit" className="button-full" disabled={isLoading}>
             Sign in
           </Button>
         </Form>

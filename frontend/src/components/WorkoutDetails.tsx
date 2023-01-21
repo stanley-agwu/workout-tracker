@@ -23,8 +23,18 @@ const WorkoutDetails: React.FC<IHookProps> = ({ workout, handleEdit, handleDelet
       </Card.Text>
     </Card.Body>
     <div className="icons">
-      <button className="delete" onClick={() =>handleDelete(workout)}><DeleteIcon width="20" height="20" /></button>
-      <button className="edit" onClick={() => handleEdit(workout)}><EditIcon width="20" height="20" /></button>
+      <button
+        aria-label="Delete"
+        className="delete"
+        onClick={() =>handleDelete(workout)}>
+          <DeleteIcon width="20" height="20" />
+      </button>
+      <button
+        aria-label="Edit"
+        className="edit"
+        onClick={() => handleEdit(workout)}>
+          <EditIcon width="20" height="20" />
+      </button>
     </div>
   </Card>
 );

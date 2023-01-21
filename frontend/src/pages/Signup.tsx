@@ -57,7 +57,7 @@ const Signup: FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="success" type="submit" className="button-full" disabled={isLoading}>
+          <Button aria-label="Sign up" variant="success" type="submit" className="button-full" disabled={isLoading}>
             Sign up
           </Button>
         </Form>
