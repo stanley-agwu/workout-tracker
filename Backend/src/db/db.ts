@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: './backend/config/config.env' });
 
 const connectDB = async () =>{
   try {
