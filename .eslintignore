@@ -1,0 +1,9 @@
+.eslintrc.json
+.eslintrc.js
+.env
+node_modules/
+build/
+coverage/
+dist/
+.husky/
+commitlint.config.js
