@@ -1,7 +1,8 @@
 import express from 'express';
+
 import { signin, signup } from '../controllers/usersControllers';
 
-const router  = express.Router();
+const router = express.Router();
 
 // signup route
 router.post('/signup', signup);

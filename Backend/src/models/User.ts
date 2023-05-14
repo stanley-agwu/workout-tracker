@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
 import isStrongPassword from 'validator/lib/isStrongPassword';
 
-import { IUser, ILogin } from "../types";
+import { ILogin, IUser } from '../types';
 
 const userSchema = new mongoose.Schema<IUser>({
   email: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema<IUser>({
 
 // static signup method
 userSchema.statics.signup = async function ({ email, username, password }: IUser) {
-  //validation
+  // validation
   if (!email || !username || !password) {
     throw new Error('All fields are required');
   }
@@ -32,7 +32,7 @@ userSchema.statics.signup = async function ({ email, username, password }: IUser
   if (!isStrongPassword(password)) throw new Error('Password not strong enough');
 
   const userExist = await this.findOne({ email });
-  
+
   if (userExist) throw new Error('User with email already exists');
 
   const salt = await bcrypt.genSalt(10);
@@ -44,20 +44,21 @@ userSchema.statics.signup = async function ({ email, username, password }: IUser
 };
 
 // static signin method
-userSchema.statics.signin = async function ({ identifier, password}: ILogin) {
-    //validation
-  if ((!identifier) || !password) {
+userSchema.statics.signin = async function ({ identifier, password }: ILogin) {
+  // validation
+  if (!identifier || !password) {
     throw new Error('All fields are required');
   }
   const isIdentifierEmail = isEmail(identifier);
-  const user: ILogin = isIdentifierEmail ? await this.findOne({ email: identifier })
-                              : await this.findOne({ username: identifier });
+  const user: ILogin = isIdentifierEmail
+    ? await this.findOne({ email: identifier })
+    : await this.findOne({ username: identifier });
   if (!user) throw new Error(isIdentifierEmail ? 'Incorrect email' : 'Incorrect username');
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) throw new Error('Invalid password');
 
   return user;
-}
+};
 
 module.exports = mongoose.model<IUser>('User', userSchema);
