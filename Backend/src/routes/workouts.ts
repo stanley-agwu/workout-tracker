@@ -1,10 +1,12 @@
 import express from 'express';
-import { createWorkout, 
-          deleteWorkout, 
-          getAllWorkouts, 
-          getWorkout, 
-          updateWorkout
-        } from '../controllers/workoutsController';
+
+import {
+  createWorkout,
+  deleteWorkout,
+  getAllWorkouts,
+  getWorkout,
+  updateWorkout,
+} from '../controllers/workoutsController';
 import { requireAuth } from '../middlewares/requireAuth';
 
 const router = express.Router();

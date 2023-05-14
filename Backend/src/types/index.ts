@@ -11,6 +11,10 @@ export interface IUser {
   password: string;
 }
 
+export interface ICreatedUser extends IUser {
+  _id: string;
+}
+
 export interface ILogin {
   identifier: string;
   password: string;
